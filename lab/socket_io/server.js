@@ -9,11 +9,11 @@ var port = 4001;
 var server = app.listen(port);
 var io = require('socket.io')(server);
 
-var socketIoClientJs = 'node_modules/socket.io/node_modules/socket.io-client/socket.io.js';
+var socketIoClientJs = __dirname + '/node_modules/socket.io/node_modules/socket.io-client/socket.io.js';
 
 app.get('/', function(request, response) {
 
-	var index = fs.readFileSync('index.html').toString();
+	var index = fs.readFileSync(__dirname + '/index.html').toString();
 	response.set('Content-Type', 'text/html');
 	response.send(index);
 
@@ -36,7 +36,7 @@ var timeFormat = "hh:mm:ss";
 
 io.on('connection', function (socket) {
 
-	socket.emit(WELCOME, { message: 'Welcome to scoker.io server' });
+	socket.emit(WELCOME, { message: 'Welcome to socket.io time server!' });
 
 	socket.on(GET_TIME, function (data) {
 		var t = moment().format(timeFormat);

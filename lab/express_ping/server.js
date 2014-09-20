@@ -5,9 +5,11 @@ var app = express();
 var fs = require('fs');
 var port = 4000;
 
+app.use(express.static(__dirname + '/assets'));
+
 app.get('/', function(request, response) {
 
-	var index = fs.readFileSync('index.html').toString();
+	var index = fs.readFileSync(__dirname + '/index.html').toString();
 
 	index = index.replace('{curtime}', new Date());
 
