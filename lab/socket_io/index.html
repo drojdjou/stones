@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Socket IO Time Server</title>
+
+	<style type="text/css">
+
+	body {
+		background-color: #000;
+		font-family: monospace;
+		font-size: 13px;
+		color: #0f0;
+	}
+
+	h1 {
+		font-size: 1em;
+	}
+
+	p {
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	</style>
+
+</head>
+
+<body>
+	
+<p>An Express app getting time from a socket.io server</p> 
+
+<p id="comm"></p> 
+<p id="time"></p> 
+
+<script type="text/javascript" src="socket.io.js"></script>
+
+<script type="text/javascript">
+
+	var port = 4001;
+
+	var comm = document.querySelector('#comm');
+	var time = document.querySelector('#time');
+
+	var WELCOME = 'welcome';
+	var GET_TIME = 'getTime';
+	var SEND_TIME = 'sendTime';
+
+	var socket = io('http://localhost:' + 4001);
+	
+	socket.on(WELCOME, function (data) {
+		comm.innerHTML = data.message;
+	});
+
+	socket.on(SEND_TIME, function (data) {
+		time.innerHTML = data;
+	});
+
+</script>
+
+</body>
+</html>
